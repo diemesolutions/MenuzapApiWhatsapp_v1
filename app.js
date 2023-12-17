@@ -1,9 +1,9 @@
-const { Client } = require('whatsapp-web.js');
-const express = require('express');
-const socketIO = require('socket.io');
-const qrcode = require('qrcode');
-const http = require('http');
-const fs = require('fs');
+const { Client }     = require('whatsapp-web.js');
+const express        = require('express');
+const socketIO       = require('socket.io');
+const qrcode         = require('qrcode');
+const http           = require('http');
+const fs             = require('fs');
 
 const app = express();
 const server = http.createServer(app);
@@ -35,7 +35,7 @@ const client = new Client({
 client.on('message', msg => {
     if (msg.body == '!ping') {
         msg.reply('pong');
-    } else if (msg.body == 'good morning') {
+    } else if (msg.body == 'Olá!') {
       msg.reply('selamat pagi');
     }
 });
@@ -44,24 +44,24 @@ client.initialize();
 
 // Socket IO
 io.on('connection', function(socket) {
-    socket.emit('message', 'Connecting...');
+    socket.emit('message', 'Conectando...');
 
     client.on('qr', (qr) => {
-        console.log('QR RECEIVED', qr);
+        console.log('QR RECEBIDO', qr);
         qrcode.toDataURL(qr, (err, url) => {
             socket.emit('qr', url);
-            socket.emit('message', 'QR Code received, scan please!');
+            socket.emit('message', 'QR Code recebido, faça o scan!');
         });
     });
 
     client.on('ready', () => {
-        socket.emit('ready', 'Whatsapp is ready!');
-        socket.emit('message', 'Whatsapp is ready!');
+        socket.emit('ready', 'Whatsapp está pronto!');
+        socket.emit('message', 'Whatsapp está pronto!');
     });
 
     client.on('authenticated', (session) => {
-        socket.emit('authenticated', 'Whatsapp is authenticated!');
-        socket.emit('message', 'Whatsapp is authenticated!');
+        socket.emit('authenticated', 'Whatsapp autenticado!');
+        socket.emit('message', 'Whatsapp autenticado!');
         console.log('AUTHENTICATED', session);
         sessionCfg=session;
         fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), function (err) {
@@ -73,9 +73,9 @@ io.on('connection', function(socket) {
 });
 
 // Send message
-app.post('/send-message', (req, res) => {
-    const number = req.body.number;
-    const message = req.body.message;
+app.post('/enviar_mensagem', (req, res) => {
+    const number     = req.body.number;
+    const message     = req.body.message;
 
     client.sendMessage(number, message).then(response => {
         res.status(200).json({
