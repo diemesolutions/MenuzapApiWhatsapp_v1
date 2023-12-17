@@ -22,7 +22,15 @@ app.get('/', (req, res) => {
     res.sendFile('index.html', { root: __dirname });
 });
 
-const client = new Client({ puppeteer: { headless: true }, session: sessionCfg });
+#const client = new Client({ puppeteer: { headless: true }, session: sessionCfg });
+const client = new Client({
+  puppeteer: {
+    headless: true,
+    args: ['--no-sandbox']
+  },
+  session: sessionCfg
+});
+
 
 client.on('message', msg => {
     if (msg.body == '!ping') {
