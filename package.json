@@ -17,8 +17,10 @@
   "dependencies": {
     "express": "^4.17.1",
     "http": "0.0.1-security",
+    "puppeteer": "^21.6.1",
     "qrcode": "^1.4.4",
     "socket.io": "^2.3.0",
-    "whatsapp-web.js": "^1.8.2"
+    "whatsapp-web.js": "^1.8.2",
+    "winston": "^3.11.0"
   }
 }
