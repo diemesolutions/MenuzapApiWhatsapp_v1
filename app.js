@@ -33,6 +33,9 @@ const client = new Client({
 
 
 client.on('message', msg => {
+    const sender = msg.remote;
+    console.log(`Mensagem recebida de ${sender}: ${msg.body}`);
+    
     if (msg.body == '!ping') {
         msg.reply('pong');
     } else if (msg.body == 'Olá!') {
@@ -76,16 +79,23 @@ io.on('connection', function(socket) {
 app.post('/enviar_mensagem', (req, res) => {
     const number     = req.body.number;
     const message     = req.body.message;
+    
+    if (!number || !message) {
+        return res.status(400).json({
+            status:     false,
+            response:     'Número e mensagem são obrigatórios.',
+        });
+    }
 
     client.sendMessage(number, message).then(response => {
         res.status(200).json({
-            status: true,
-            response: response
+            status:     true,
+            response:     response
         });
     }).catch(err => {
         res.status(500).json({
-            status: false,
-            response: err
+            status:     false,
+            response:     err
         });
     });
 });
