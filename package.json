@@ -1,5 +1,5 @@
 {
-  "name": "menuzap-api-bailets",
+  "name": "menuzap-api-whatsapp",
   "version": "1.0.0",
   "description": "Whatsapp api Menuzap",
   "main": "app.js",
@@ -12,7 +12,7 @@
     "node.js",
     "menuzap"
   ],
-  "author": "Nur Muhammad",
+  "author": "Dieme C Defante",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
