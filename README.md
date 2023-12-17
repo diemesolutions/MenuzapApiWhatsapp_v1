@@ -1,7 +1,7 @@
 # MenuzapBaileys
 API Whatsapp com Baileys
 
-# Whatsapp API Tutorial / MENUZAP API BAILEYS
+# Whatsapp API Tutorial / MENUZAP API WHATSAPP WEB
 Implementação básica do whatsapp-web.js
 
 ### Como usar?
